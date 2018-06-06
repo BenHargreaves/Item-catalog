@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+{% block content %}
+
+{% if item != [] %}	
+    <h2> {{ item.title }} </h2>
+        <div class="menu-item">
+            <p>{{item.description}}</p>						
+        </div>
+{% endif %}
+{% if 'username' in session%}
+<a href="#">Edit</a> | <a href="#">Delete</a>
+{% endif %}
+
+{% endblock content %}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+
+    <!-- Google Signin Required -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <title>Catalog App</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info" id="head-navbar">
+        <div class="container">
+                <a class="navbar-brand" href="/">Catalog App</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Categories
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% for c in categories %}
+                                <a class="dropdown-item" href={{ url_for( 'categoryItems', category_name=c.friendlyURL) }}>{{c.name}}</a>
+                                {% endfor %}
+                            </div>
+                        </li>
+                    </ul>
+                    {% if 'username' not  in session %}
+                    <div id="signinButton">
+                        <span class="g-signin"
+                            data-scope="openid email"
+                            data-clientid="160903399470-p9t1s33e8fs6epkgr51vhn29a7k7u7pp.apps.googleusercontent.com"
+                            data-redirecturi="postmessage"
+                            data-accesstype="offline"
+                            data-cookiepolicy="single_host_origin"
+                            data-callback="signInCallback"
+                            data-approvalprompt="force">
+                        </span>
+                    </div>
+                    {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi {{ session['firstname'] }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li align="center" class="well">
+                                <div><img class="img-responsive" style="padding:2%;" src={{ session['picture'] }} width="120px" height="120px"/></div>
+                                <a href={{ url_for('disconnect') }} class="btn btn-sm btn-default"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+                            </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function signInCallback(authResult) {
+          if (authResult['code']) {
+            // Hide the sign-in button now that the user is authorized
+            $('#signinButton').attr('style', 'display: none');
+            // Send the code to the server
+            $.ajax({
+              type: 'POST',
+              url: '/gconnect',
+              // Always include an `X-Requested-With` header in every AJAX request,
+              // to protect against CSRF attacks.
+              headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+              },
+              contentType: 'application/octet-stream; charset=utf-8',
+              success: function(result) {
+                // Handle or verify the server response.
+                window.location.href = '/catalog'
+              },
+              processData: false,
+              data: authResult['code']
+            });
+          } else {
+            // There was an error.
+            console.log('There was an error.')
+          }
+        }
+        </script>
+</body>
+
+</html>

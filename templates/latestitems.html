@@ -1,0 +1,14 @@
+{% extends "categories.html" %}
+{% block citems %}
+
+{% if items !=[] %}	
+    <h2> Latest Items ({{ items|count }} items)</h2>
+        {% for i in items %}
+        <div class="menu-item">
+            <h4 class="diplay-4">{{i.title}}</h4>
+            <p>{{i.description}}</p>						
+        </div>
+        {% endfor %} 
+{% endif %}
+
+{% endblock citems %}

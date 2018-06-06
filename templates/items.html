@@ -1,0 +1,17 @@
+{% extends "categories.html" %}
+{% block citems %}
+
+{% if items !=[] %}	
+    <h2> {{category.name}} Items ({{ items|count }} items)</h2>
+        {% for i in items %}
+        <div class="menu-item">
+            <h4 class="diplay-4">{{i.title}}</h4>
+            <p>{{i.description}}</p>						
+        </div>
+        {% endfor %} 
+{% endif %}
+{% if 'username' in session%}
+<a href="#">Edit</a> | <a href="#">Delete</a>
+{% endif %}
+
+{% endblock citems %}

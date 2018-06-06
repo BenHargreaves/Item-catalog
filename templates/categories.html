@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+{% block content %}
+	
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-3">
+			{% if categories !=[] %}	
+				<h2>Categories</h2>
+					{% for c in categories %}
+						<div class="menu-item">
+							<h4 class="diplay-4"><a href={{ url_for('categoryItems', category_name=c.friendlyURL) }}>{{c.name}}</a></h3>								
+						</div>
+					{% endfor %}
+			{% endif %}
+			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-5">
+				{% block citems %}
+				{% endblock citems %}
+			</div>
+		</div>
+
+{% endblock content %}
