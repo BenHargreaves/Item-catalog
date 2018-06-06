@@ -8,10 +8,11 @@
             <h4 class="diplay-4">{{i.title}}</h4>
             <p>{{i.description}}</p>						
         </div>
+        {% if 'username' in session %}
+        <a href={{ url_for('itemDescription', category_name=category.friendlyURL, item_name=i.friendlyTitle) }}>Edit</a> | <a href="#">Delete</a>
+        {% endif %}
+        <hr class="hr"></hr>
         {% endfor %} 
-{% endif %}
-{% if 'username' in session%}
-<a href="#">Edit</a> | <a href="#">Delete</a>
 {% endif %}
 
 {% endblock citems %}

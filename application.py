@@ -86,7 +86,7 @@ def itemDescription(category_name, item_name):
     category = session.query(Category).filter_by(friendlyURL=category_name).one()
     category_id = category.id
     item = session.query(CatalogItem).filter_by(category_id=category_id, friendlyTitle=item_name).one()
-    return render_template('viewItem.html', item=item, category=category)
+    return render_template('viewItem.html', item=item)
 
 @app.route('/catalog/<category_name>/<item_name>/edit/', methods=['GET', 'POST'])
 def editItem(category_name, item_name):

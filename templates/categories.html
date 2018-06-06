@@ -11,7 +11,7 @@
 				<h2>Categories</h2>
 					{% for c in categories %}
 						<div class="menu-item">
-							<h4 class="diplay-4"><a href={{ url_for('categoryItems', category_name=c.friendlyURL) }}>{{c.name}}</a></h3>								
+							<h5 class="diplay-5"><a href={{ url_for('categoryItems', category_name=c.friendlyURL) }}>{{c.name}}</a></h5>								
 						</div>
 					{% endfor %}
 			{% endif %}

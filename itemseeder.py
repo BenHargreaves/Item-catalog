@@ -66,6 +66,10 @@ Item3 = CatalogItem(title = 'Baseball Bat',friendlyTitle='baseballbat', descript
 session.add(Item3)
 session.commit()
 
+Item9 = CatalogItem(title = 'Baseball Glove',friendlyTitle='baseballglove', description = 'Catch this!', category_id = 3, user_id = 1)
+session.add(Item9)
+session.commit()
+
 Item4 = CatalogItem(title = 'Spikeball kit',friendlyTitle='spikeballkit', description = 'Bro that def hit the rim. RE-DO!', category_id = 4, user_id = 1)
 session.add(Item4)
 session.commit()

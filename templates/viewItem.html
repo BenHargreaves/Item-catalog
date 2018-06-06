@@ -8,7 +8,7 @@
         </div>
 {% endif %}
 {% if 'username' in session%}
-<a href={{ url_for('editItem', category_name=category.friendlyURL, item_name=item.friendlyTitle) }}>Edit</a> | <a href="#">Delete</a>
+<a href={{ url_for('editItem', category_name=item.category.friendlyURL, item_name=item.friendlyTitle) }}>Edit</a> | <a href="#">Delete</a>
 {% endif %}
 
 {% endblock content %}
