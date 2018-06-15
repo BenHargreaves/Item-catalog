@@ -18,9 +18,9 @@ DBSession = sessionmaker(bind=engine)
 # session.rollback()
 session = DBSession()
 
-User1 = User(name = "Benji", email='ben@emailtest.com', picture='https://pbs.twimg.com/profile_images/2671170543/18debd694829ed78203a5a36dd364160_400x400.png')
+""" User1 = User(name = "Benji", email='ben@emailtest.com', picture='https://pbs.twimg.com/profile_images/2671170543/18debd694829ed78203a5a36dd364160_400x400.png')
 session.add(User1)
-session.commit()
+session.commit() """
 
 Category1 = Category(name='Snowboarding', friendlyURL='snowboarding')
 session.add(Category1)
