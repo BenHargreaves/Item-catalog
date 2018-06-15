@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+{% block content %}
+
+<h2>Delete Item</h2>
+<p>Are you sure you wish to delete {{ item.title }}?</p>
+<form action="{{ url_for('deleteItem', item_name = item.friendlyTitle, category_name = item.category.friendlyURL)}}" method="POST">
+    {% if 'username' in session%}
+    <button type="submit" class="btn btn-primary">Delete</button>
+    {% endif %}
+</form>
+
+{% endblock content %}

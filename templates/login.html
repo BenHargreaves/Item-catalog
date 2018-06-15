@@ -1,5 +1,11 @@
 <html>
     <body>
-        <h1> TEST </h1>
+        {% for u in users %}
+        <h1> {{ u.name }} </h1>
+        <p>{{ u.id }}</p>
+        <p>{{ u.email }}</p>
+        <p>{{ u.picture }}</p>
+        </hr>
+        {% endfor %}
     </body>
 </html>

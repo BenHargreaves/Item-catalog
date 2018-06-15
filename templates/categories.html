@@ -15,6 +15,11 @@
 						</div>
 					{% endfor %}
 			{% endif %}
+			{% if 'username' in session %}
+			<div class="menu-item">
+				<h5 class="diplay-5"><a href={{ url_for('newCategory') }}>+ Add Category</a></h5>								
+			</div>
+			{% endif %}
 			</div>
 			<div class="col-md-1"></div>
 			<div class="col-md-5">

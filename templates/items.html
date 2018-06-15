@@ -1,18 +1,23 @@
 {% extends "categories.html" %}
 {% block citems %}
 
+<h2> {{category.name}} Items ({{ items|count }} items)</h2>
+{% if 'username' in session %}
+<div class="menu-item">
+    <h5 class="diplay-5"><a href={{ url_for('newItem') }}>+ Add Item</a></h5>								
+</div>
+{% endif %}
 {% if items !=[] %}	
-    <h2> {{category.name}} Items ({{ items|count }} items)</h2>
-        {% for i in items %}
-        <div class="menu-item">
-            <h4 class="diplay-4">{{i.title}}</h4>
-            <p>{{i.description}}</p>						
-        </div>
-        {% if 'username' in session %}
-        <a href={{ url_for('itemDescription', category_name=category.friendlyURL, item_name=i.friendlyTitle) }}>Edit</a> | <a href="#">Delete</a>
-        {% endif %}
-        <hr class="hr"></hr>
-        {% endfor %} 
+    {% for i in items %}
+    <div class="menu-item">
+        <h4 class="diplay-4">{{i.title}}</h4>
+        <p>{{i.description}}</p>						
+    </div>
+    {% if 'username' in session %}
+    <a href={{ url_for('itemDescription', category_name=category.friendlyURL, item_name=i.friendlyTitle) }}>View</a> 
+    {% endif %}
+    <hr class="hr"></hr>
+    {% endfor %} 
 {% endif %}
 
 {% endblock citems %}

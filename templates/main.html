@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-info" id="head-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="head-navbar">
         <div class="container">
                 <a class="navbar-brand" href="/">Catalog App</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -53,8 +53,8 @@
                     </div>
                     {% else %}
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi {{ session['firstname'] }} <b class="caret"></b></a>
+                        <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hi {{ session['firstname'] }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li align="center" class="well">
                                 <div><img class="img-responsive" style="padding:2%;" src={{ session['picture'] }} width="120px" height="120px"/></div>
@@ -67,7 +67,19 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container border">
+        <div class = 'flash'>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong> {{ message }} </strong>
+                    </div>
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+      </div>
         {% block content %} {% endblock %}
     </div>
 
@@ -96,7 +108,10 @@
               contentType: 'application/octet-stream; charset=utf-8',
               success: function(result) {
                 // Handle or verify the server response.
-                window.location.href = '/catalog'
+                setTimeout(function() {
+                window.location.href = '/catalog';
+                }, 0);
+                
               },
               processData: false,
               data: authResult['code']
