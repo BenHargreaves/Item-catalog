@@ -78,6 +78,12 @@ def disconnect():
         del login_session['picture']
         del login_session['email']
         del login_session['user_id']
+        # display flash message depending on wether the logout was
+        # a success, or the auth token didnt exist
+        if result['status'] == 200:
+            flash('You have been successfully logged out')
+        else:
+            flash('Invalid Auth token, Please sign in again.')
 
     return redirect("/catalog", code=302)
 
