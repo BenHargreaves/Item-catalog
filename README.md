@@ -28,7 +28,15 @@ python itemseeder.py
 ```
 (your terminal console should display a 'success' message on completion)
 
-- Log in to App using the Google Sign in button first to initialize the first User (UserID 1)
+- Run the application server using your terminal window of choice
+```
+python application.py
+```
+- Open up a web Browser, and navigate to the following address (Port 8080 is requred)
+```
+http://localhost:8080/
+```
+- Log in to App using the Google Sign in button on any page first to initialize the first User (UserID 1)
 
 Every item in the seeder code has a UserID of '1' by default. This user will not exist however until the first user has logged in successfully.
 There is no way to edit / delete items through the UI unless you are logged in, but if you try to navigate to the JSON endpoints or Edit / Delete URLs before
