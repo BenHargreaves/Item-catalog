@@ -71,8 +71,9 @@ def disconnect():
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
 
-    # If token successfully revoked, delete login session user info
-    if '200' == '200':
+    # If token successfully revoked or doesnt exist(expired),
+    # delete login session user info
+    if result['status'] == '200' or result['status'] == '400':
         del login_session['username']
         del login_session['picture']
         del login_session['email']
